@@ -11,8 +11,8 @@
     <title>CRIPTOMONEDAS</title>
   </head>
   <body>
-    <h1 class = "bg-primary text-white text-center">Criptomonedas con Boostrap</h1>
-    
+    <h1 class = "bg-primary text-white text-center">Examen Final Criptomonedas</h1>
+
     <div class = "container"> 
         @yield('contenido')
 </div>
