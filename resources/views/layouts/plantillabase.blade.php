@@ -17,7 +17,7 @@
 <nav class="navbar navbar-light bg-warning">
     <a class="navbar-brand" href="{{url('/')}}">
     <i class="fab fa-monero"></i>
-        LISTADO CRIPTOMONEDA
+              CRIPTOMONEDAS
     </a>
 
 

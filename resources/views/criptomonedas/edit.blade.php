@@ -42,8 +42,8 @@
                     <div class="grid grid-cols-1 mt-1 mx-7">
                         <img id="logotipoSeleccionada" style="max-height: 300px;">
                     </div>
-                    <div class="grid grid-cols-1 mt-5 mx-7">
-                        <label for="inputState">Cargar LOGOTIPO</label>
+                    <div class="grid grid-cols-1 mt-5 mx-7 font-italic">
+                        <label for="inputState">SUBIR LOGOTIPO</label>
                         <div class="flex items-center justify-center w-full">
                             <input name="logotipo" value="{{ $cript->logotipo }}" id="logotipo" type="file" class="hidden ">
 

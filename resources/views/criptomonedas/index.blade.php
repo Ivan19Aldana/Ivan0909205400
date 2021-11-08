@@ -5,9 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-13">
                 <h2 class="text-center mb-5" >LISTADO DE CRIPTOMONEDAS </h2>
-                <a type="button " href="{{ url('/crear')}}" class="btn btn-success btn-lg active mb-4 col-2 float-right ">AGREGAR </a>
+                <a type="button " href="{{ url('/crear')}}" class="btn btn-success btn-lg active mb-4 col-2 float-left ">CREAR </a>
 
-                <table class="table table-hover table-dark ">
+                <table class="table table-striped">
                   <thead>
                     <tr>
 
@@ -27,10 +27,11 @@
                     @foreach($criptomonedas as $criptomoneda)
                         <tr>
 
-                            <td class=" border px-4 py-2">
-                                <img src="/imagen/{{$criptomoneda->logotipo}}" width="60%">
-
+                        <td class=" border px-4 py-2">
+                              <img src="{{ asset('storage').'/'.$criptomoneda->logotipo}}" alt="" height="80">
                             </td>
+
+
                             <td class=" border px-4 py-2">{{$criptomoneda->nombre}}</td>
                             <td class=" border px-5 py-2">{{$criptomoneda->precio}}</td>
                             <td class=" border px-8 py-2">{{$criptomoneda->descripcion}}</td>
@@ -42,7 +43,7 @@
 
 
                                         <button type="submit" onclick="return ;" style = "background-color: transparent ">
-                                            <i class="far fa-edit btn btn-outline-success "></i>
+                                        <i class="fas fa-pen-square"></i>
                                         </button>
 
 
@@ -51,7 +52,7 @@
                                         @csrf @method('DELETE')
 
                                         <button type="submit" onclick="return confirm('Eliminar Registro de Usuario');" style = "background-color: transparent">
-                                            <i class="far fa-trash-alt btn btn-outline-danger"></i>
+                                        <i class="fas fa-trash-alt"></i>
                                         </button>
 
 
