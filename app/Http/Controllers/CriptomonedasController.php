@@ -15,7 +15,7 @@ class CriptomonedasController extends Controller
        $criptomonedas = DB::table('criptomoneda')
            ->join('lenguaje_programacion', 'criptomoneda.lenguaje_id', '=', 'lenguaje_programacion.id')
            ->select('criptomoneda.*', 'lenguaje_programacion.descripcion_lenguaje')
-            ->paginate(2);
+            ->paginate(3);
 
 
         return view('criptomonedas.index', compact('criptomonedas'));
@@ -48,17 +48,9 @@ class CriptomonedasController extends Controller
                 'descripcion'=>'required|string|max:255',
                'lenguaje' => 'required'
             ]);
-        if($request->hasFile('imagen')){
-            $validation['logotipo'] = $request-> file('imagen')->store('imagen','public');
-        }
-//         $criptomoneda =$request->all();
-//            if($logotipo =$request->file('logotipo')){
-//                $rutaGuardarImg= 'imagen/';
-//                $imagenlogotipo=date('YmdHis')."." .$logotipo->getClientOriginalExtension();
-//                $logotipo->move($rutaGuardarImg,$imagenlogotipo);
-//                $logotipo['imagen'] = "$imagenlogotipo";
-//            }
-
+            if($request->hasFile('logotipo')){
+                $validation['logotipo'] = $request-> file('logotipo')->store('logos','public');
+            }
                  criptomonedas::create([
                 'logotipo'=>$validation['logotipo'],
                 'nombre'=>$validation['nombre'],
@@ -80,6 +72,7 @@ class CriptomonedasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         //
@@ -110,11 +103,10 @@ class CriptomonedasController extends Controller
         $datacriptomonedas = request()->except((['_token','_method']));
 
         /*Recolecion de logotipo*/
-        if($request->hasFile('imagen')){
-            $cript = criptomonedas::findOrFail($id);
-            Storage::delete('public/'.$cript->logotipo);    
-            $criptomoneda ['logotipo'] = $request-> file('imagen')->store('imagen','public');
-        }
+        if($request->hasFile('logotipo')){
+            $criptomonedas = criptomonedas::findOrFail($id);
+            Storage::delete('public/'.$criptomonedas->logotipo);
+            $datacriptomonedas ['logotipo'] = $request-> file('logotipo')->store('logos','public');}
 
         criptomonedas::where('id', '=', $id)->update($datacriptomonedas);
 
