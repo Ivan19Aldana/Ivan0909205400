@@ -13,8 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+route::get("/",[\App\Http\Controllers\CriptomonedasController::class,'index']);
+route::get("/lenguaje",[\App\Http\Controllers\CriptomonedasController::class,'index']);
+route::get("/crear",[\App\Http\Controllers\CriptomonedasController::class,'create']);
+route::get("/editar/{id}",[\App\Http\Controllers\CriptomonedasController::class,'edit']);
+route::delete("/delete/{id}",[\App\Http\Controllers\CriptomonedasController::class,'destroy'])->name('destroy');
+route::post("/save",[\App\Http\Controllers\CriptomonedasController::class,'store']);
+route::patch("/modificar/{id}",[\App\Http\Controllers\CriptomonedasController::class,'update'])->name("update");
 
-Route:: Resource('criptomonedas', 'App\Http\Controllers\criptomonedasController' );
+//Route::get('/', function () {
+//    return view('index');
+//});

@@ -1,32 +1,74 @@
-@extends('layouts.plantillabase');
+@extends('layouts.plantillabase')
+@section('content')
 
-@section ('contenido') 
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <h2 class="text-center mb-5" > FORMULARIO CREAR CRIPTOMONEDA </h2>
 
-<h2>Crear Registros</h2>
+                <form action="{{ url ('/save') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-row font-italic ">
+                        <div class="form-group col-md-6 ">
+                            <label for="inputEmail4">NOMBRE</label>
+                            <input type="text" name="nombre" class="form-control border border-success"  placeholder="Ej. Bitcoin">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">PRECIO</label>
+                            <input type="text" name="precio" class="form-control border border-success"  placeholder="Ej. Q 470166.88">
+                        </div>
+                    </div>
+                    <div class="form-group font-italic">
+                        <label for="inputAddress">DESCRIPCION</label>
+                        <input type="text" name="descripcion" class="form-control border border-success"  placeholder=" Ej. Bitcoin es una criptomoneda y un sistema de pago sin banco central o administrador único">
+                    </div>
 
-<form action = "/criptomonedas"method=post>
-@csrf
-  <div class="mb-3">
-    <label for="" class="form-label">Nombre</label>
-    <input id="nombre" name="nombre" type="text" class="form-control" tabindex="1">    
-  </div>
-  <div class="mb-3">
-    <label for="" class="form-label">Logotipo</label>
-    <input id="logotipo" name="logotipo" type="text" class="form-control" tabindex="2">
-  </div>
-  <div class="mb-3">
-    <label for="" class="form-label">Precio</label>
-    <input id="precio" name="precio" type="number" step="any" value="0.00" class="form-control" tabindex="3">
-  </div>
-  <div class="mb-3">
-    <label for="" class="form-label">Descripcion</label>
-    <input id="descripcion" name="descripcion" type="text" class="form-control" tabindex="4">
-  </div>
-   <div class="mb-3">
-    <label for="" class="form-label">Lenguaje</label>
-    <input id="lenguaje" name="lenguaje" type="number" class="form-control" tabindex="5">
-  </div>
-  <a href="/criptomonedas" class="btn btn-secondary" tabindex="5">Cancelar</a>
-  <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
-</form>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-4 font-italic">
+                            <label for="">LENGUAJE PROGRAMACION</label>
+                            <select name="lenguaje" class="form-control border border-success">
+                                <option value="" >Seleccione lenguaje...</option>
+                                @foreach( $lenguaje as $lenguajes)
+                                    <option value="{{$lenguajes->id}}" > {{$lenguajes->descripcion_lenguaje}}  </option>
+                                @endforeach
+                            </select>
+                            <!--select name="lenguaje" v-model="lenguaje.criptomoneda" class="selectpicker" required
+                                    data-none-Results-Text="No se encontro el lenguaje"
+                                    data-none-Selected-Text="Escoja un lenguaje" data-live-search="true">
+                                <option value="" hidden>Selecciona un lenguaje</option>
+                            </select-->
+                        </div>
+
+                    </div>
+
+                    <div class="grid grid-cols-1 mt-1 mx-7">
+                        <img id="logotipoSeleccionada" style="max-height: 300px;">
+                    </div>
+                    <div class="grid grid-cols-1 mt-5 mx-7 font-italic">
+                        <label for="inputState">SUBIR LOGOTIPO</label>
+                        <div class="flex items-center justify-center w-full">
+                            <input name="logotipo" id="logotipo" type="file" class="hidden ">
+
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg active mb-4 col-2 float-right border border-info "> GUARDAR </button>
+                    <a type="button " href="{{ url('/')}}" class="btn btn-danger btn-lg active mb-4 col-2 float-right mr-3">CANCELAR </a>
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
 @endsection

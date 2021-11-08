@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\criptomoneda;
+use App\Models\criptomonedas;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Lenguaje;
 
-class CriptomonedaController extends Controller
+class CriptomonedasController extends Controller
 {
     public function index()
     {
@@ -18,7 +18,7 @@ class CriptomonedaController extends Controller
             ->paginate(2);
 
 
-        return view('archivo.index', compact('criptomonedas'));
+        return view('criptomonedas.index', compact('criptomonedas'));
     }
 
     /**
@@ -30,7 +30,7 @@ class CriptomonedaController extends Controller
     {
        // return view('archivo.crear');
         $lenguaje = Lenguaje::all();
-        return view('archivo.crear', compact('lenguaje'));
+        return view('criptomonedas.create', compact('lenguaje'));
     }
 
     /**
@@ -59,7 +59,7 @@ class CriptomonedaController extends Controller
 //                $logotipo['imagen'] = "$imagenlogotipo";
 //            }
 
-                 criptomoneda::create([
+                 criptomonedas::create([
                 'logotipo'=>$validation['logotipo'],
                 'nombre'=>$validation['nombre'],
                 'precio'=>$validation['precio'],
@@ -93,9 +93,9 @@ class CriptomonedaController extends Controller
      */
     public function edit($id)
     {
-        $cript = criptomoneda::findOrFail($id);
+        $cript = criptomonedas::findOrFail($id);
         $lenguaje= Lenguaje::all();
-        return view('archivo.editar', compact('cript', 'lenguaje'));
+        return view('criptomonedas.edit', compact('cript', 'lenguaje'));
     }
 
     /**
@@ -107,16 +107,16 @@ class CriptomonedaController extends Controller
      */
     public function update(Request $request,  $id)
     {
-        $datacriptomoneda = request()->except((['_token','_method']));
+        $datacriptomonedas = request()->except((['_token','_method']));
 
         /*Recolecion de logotipo*/
         if($request->hasFile('imagen')){
-            $cript = criptomoneda::findOrFail($id);
-            Storage::delete('public/'.$cript->logotipo);
+            $cript = criptomonedas::findOrFail($id);
+            Storage::delete('public/'.$cript->logotipo);    
             $criptomoneda ['logotipo'] = $request-> file('imagen')->store('imagen','public');
         }
 
-        criptomoneda::where('id', '=', $id)->update($datacriptomoneda);
+        criptomonedas::where('id', '=', $id)->update($datacriptomonedas);
 
         return redirect('/')->with('editar', 'ok');
     }
@@ -141,12 +141,12 @@ class CriptomonedaController extends Controller
      */
     public function destroy($id)
     {
-        $criptomoneda = criptomoneda::findOrFail($id);
+        $criptomonedas = criptomonedas::findOrFail($id);
 
-        $criptomoneda->delete();
+        $criptomonedas->delete();
 
 
 
-        return back()->with('criptomonedaEliminado', 'Criptomoneda eliminada');
+        return back()->with('criptomonedasEliminado', 'Criptomonedas eliminada');
     }
 }

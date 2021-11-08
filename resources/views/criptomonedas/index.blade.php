@@ -1,37 +1,75 @@
-@extends('layouts.plantillabase');
+@extends('layouts.plantillabase')
+@section('content')
 
-@section ('contenido') 
-<a href = "criptomonedas/create" class = "btn btn-primary">CREAR</a> 
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-13">
+                <h2 class="text-center mb-5" >LISTADO DE CRIPTOMONEDAS </h2>
+                <a type="button " href="{{ url('/crear')}}" class="btn btn-success btn-lg active mb-4 col-2 float-right ">AGREGAR </a>
+
+                <table class="table table-hover table-dark ">
+                  <thead>
+                    <tr>
+
+                        <th class="border px-4 py-2 text-center">LOGOTIPO</th>
+                        <th class="border px-4 py-2 text-center">NOMBRE</th>
+                        <th class="border px-4 py-2 text-center">PRECIO Q</th>
+                        <th class="border px-4 py-2 text-center">DESCRIPCION</th>
+                        <th class="border px-4 py-2 text-center">LENGUAJE</th>
+                        <th class="border px-4 py-2 text-center ">OPCIONES</th>
 
 
-<table class = "table table-dark table-striped mt-4">
-    <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Logotipo</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Lenguaje</th>
-            <th scope="col">Acciones</th>
-</tr>
-</thead>
-<tbody>
-    @foreach  ($criptomonedas as $criptomonedas)
-    <tr>
-        <td>{{$criptomonedas->Id}}</td>
-        <td>{{$criptomonedas->Nombre}}</td>
-        <td>{{$criptomonedas->Logotipo}}</td>
-        <td>{{$criptomonedas->Precio}}</td>
-        <td>{{$criptomonedas->Descripcion}}</td>
-        <td>{{$criptomonedas->Lenguaje}}</td>
-        <td>
-            <a href= "/criptomonedas/{{$criptomonedas->Id}}/edit" class = "btn btn-info" >Editar</a>
-            <button class = "btn btn-danger">Borrar</button>
-</td>
 
-</tr>
-    @endforeach
-</tbody>
-</table>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    @foreach($criptomonedas as $criptomoneda)
+                        <tr>
+
+                            <td class=" border px-4 py-2">
+                                <img src="/imagen/{{$criptomoneda->logotipo}}" width="60%">
+
+                            </td>
+                            <td class=" border px-4 py-2">{{$criptomoneda->nombre}}</td>
+                            <td class=" border px-5 py-2">{{$criptomoneda->precio}}</td>
+                            <td class=" border px-8 py-2">{{$criptomoneda->descripcion}}</td>
+                            <td class=" border px-4 py-2">{{$criptomoneda->descripcion_lenguaje}}</td>
+                            <td class=" border px-4 py-2">
+                                <div class="btn-group flex justify-center rounded-lg text-lg">
+
+                                    <form action="{{ url('/editar', $criptomoneda->id)}}" >
+
+
+                                        <button type="submit" onclick="return ;" style = "background-color: transparent ">
+                                            <i class="far fa-edit btn btn-outline-success "></i>
+                                        </button>
+
+
+                                    </form>
+                                    <form action="{{ url('/delete', $criptomoneda->id)}}" method="post">
+                                        @csrf @method('DELETE')
+
+                                        <button type="submit" onclick="return confirm('Eliminar Registro de Usuario');" style = "background-color: transparent">
+                                            <i class="far fa-trash-alt btn btn-outline-danger"></i>
+                                        </button>
+
+
+                                    </form>
+
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+                    @endforeach
+                  </tbody>
+
+                </table>
+                {{ $criptomonedas->links() }}
+            </div>
+
+        </div>
+    </div>
 @endsection

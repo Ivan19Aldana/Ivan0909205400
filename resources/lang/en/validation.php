@@ -137,11 +137,37 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'nombre' => [
+            'required' => 'El nombre es obligatorio',
+            'string'=> 'El nombre tiene que ser un texto',
+            'max:35'=> 'El nombre es demasiado largo'
         ],
-    ],
 
+        'precio' => [
+            'required' => 'El precio es obligatorio',
+            'numeric' => 'Solo se permite numeros',
+        ],
+
+        'descripcion' => [
+            'required' => 'La descripción es obligatoria',
+            'string' => 'Solo se permite texto',
+            'max:255' => 'Descripción muy larga'
+        ],
+
+        'lenguaje' => [
+            'required' => 'Seleccionar lenguaje obligatoriamente',
+        ],
+        'logotipo' => [
+            'required' => 'Logotipo obligatorio',
+        ],
+        'descripcion_leng' => [
+            'required' => 'Descripcion obligatoria',
+            'unique' => 'El lenguaje ya existe',
+            'string' => 'Solo se permite texto',
+            'max:45' => 'Descripcion muy larga'
+        ],
+
+    ],
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes

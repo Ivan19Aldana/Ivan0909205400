@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class criptomoneda extends Model
+class criptomonedas extends Model
 {
     protected $table='criptomoneda';
     public $timestamps=false;
