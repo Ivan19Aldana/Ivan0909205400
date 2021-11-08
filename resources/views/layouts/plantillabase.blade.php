@@ -14,15 +14,10 @@
 <body>
 
 <!-- Image and text -->
-<nav class="navbar navbar-light bg-primary">
+<nav class="navbar navbar-light bg-warning">
     <a class="navbar-brand" href="{{url('/')}}">
-        <i class="fab fa-bitcoin fa-2x"></i>
+    <i class="fab fa-monero"></i>
         LISTADO CRIPTOMONEDA
-    </a>
-
-    <a class="navbar-brand float-left" href="{{url('/lenguaje')}}">
-        <i class="fas fa-code fa-2x"></i>
-        LISTADO LENGUAJE PROGRAMACION
     </a>
 
 
